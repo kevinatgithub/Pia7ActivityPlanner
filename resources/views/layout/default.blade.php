@@ -13,7 +13,7 @@
     <div class="container">
         <div class="content">
             <div id="app">
-                <example-component></example-component>
+                <app />
             </div>
         </div>
     </div>
