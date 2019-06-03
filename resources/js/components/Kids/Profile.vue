@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="mt-5 col-sm-8 offset-sm-2">
+        <div class="mt-5 col-sm-12">
             <b-card class="text-center" title="Mark Joseph Pantaleon">
                 <b-card-text>
                     Below are the selected activities for Mark Joseph Pantaleon.<br/>

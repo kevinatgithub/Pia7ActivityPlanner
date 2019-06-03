@@ -12,6 +12,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 
+import axios from 'axios'
+
+const base = axios.create({
+  baseURL: 'http://localhost/kidzania/public/api'
+})
+
+Vue.prototype.$http = base
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

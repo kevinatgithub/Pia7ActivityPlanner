@@ -1,71 +1,71 @@
 <template>
     <div class="row">
-        <div class="col-sm-12">
-            <h2 style="color:#fff; text-align:center;">Select Activity</h2>
-
-            <div class="col-lg-4 col-md-6 mt-1 activity-card"  v-for="a in activities" :key="a.id">
-                <div :class="'card bg-dark text-' + a.textColor">
-                    <img class="card-img" :src="a.img" alt="Card image">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">{{a.title}}</h5>
-                        <p class="card-text">{{a.partner}}</p>
+        <div class="col-sm-12" v-if="!current">
+            <!-- <h2 style="color:#fff; text-align:center;">Select Activity</h2> -->
+            <p style="color:#fff;">Select an Establishment</p>
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-6 mt-1 mb-1 activity-card"  v-for="a in establishments" :key="a.id" @click.prevent="current=a">
+                    <div :class="'card bg-dark text-' + (!a.color ? 'white' : a.color)">
+                        <img class="card-img" :src="a.img" alt="Card image">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">{{a.name}}</h5>
+                            <p class="card-text">{{a.partner}}</p>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
+        </div>
+        <div class="col-sm-12" v-if="current">
+            <b-jumbotron :header="current.name" :lead="current.partner">
+                <b-button variant="primary" size="sm" @click.prevent="current=null">Back</b-button><br/>
+                <b-img class="mt-2" :src="current.img" fluid alt="Img"></b-img>
+                <p>Select Activity from this Establishment</p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped table-condensed" style="font-size:12px; background-color:#fff;">
+                        <thead>
+                            <th colspan="5" class="text-center">Available activity from this establishment</th>
+                        </thead>
+                        <thead>
+                            <th>Role</th>
+                            <th>Kidzos</th>
+                            <th>Duration<br/>(In Minutes)</th>
+                            <th>Capacity</th>
+                            <th>Minimum Age</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="a in current.activities" :key="a.id">
+                                <td><span>{{a.job}}<br/></span>{{a.role}}</td>
+                                <td>{{a.kidzos}}</td>
+                                <td>{{a.duration}}</td>
+                                <td>{{a.capacity}}</td>
+                                <td>{{a.min_age}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </b-jumbotron>
         </div>
     </div>
 </template>
 
 <script>
-let activities = [
-    {
-        id : 0, 
-        title : "Acting Academy", 
-        partner : "Star Magic",
-        img : "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/54/larger/Activities-ActingAcad.jpeg?1508897010",
-        textColor : "white"
-    },
-    {
-        id : 1, 
-        title : "Art and Design Academy", 
-        partner : "National Bookstore",
-        img : "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/595/larger/Activities-ArtsNDesign.jpeg?1508900326",
-        textColor : "white"
-    },
-    {
-        id : 2, 
-        title : "Aviation Academy", 
-        partner : "Cebu Pacific",
-        img : "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/55/larger/Activities-Aviation2.jpeg?1508897053",
-        textColor : "white"
-    },
-    {
-        id : 3, 
-        title : "BakeShop", 
-        partner : "Goldilucks",
-        img : "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/58/larger/Activities-Bakeshop.jpeg?1508898097",
-        textColor : "white"
-    },
-    {
-        id : 4, 
-        title : "Bank", 
-        partner : "Bank of the Philippine Islands",
-        img : "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/59/larger/Activities-Bank.jpeg?1508897601",
-        textColor : "black"
-    },
-    {
-        id : 5, 
-        title : "Beauty Salon", 
-        partner : "Beauty Salon",
-        img : "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/371/larger/Activities-BeautySalon.jpeg?1508853969",
-        textColor : "white"
-    },
-];
+import axios from 'axios';
 export default {
     data(){
         return {
-            activities
+            establishments : [], current: null
+        }
+    },
+    mounted(){
+        this.loadEstablishments();
+    },
+    methods : {
+        loadEstablishments(){
+            this.$http.get("/establishments")
+            .then(r=>{
+                this.establishments = r.data;
+            });
         }
     }
 }
@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
 .activity-card{
-    max-height: 100px !important;
+    max-height: 140px !important;
     overflow: hidden;
     border:none !important;
     cursor: pointer;

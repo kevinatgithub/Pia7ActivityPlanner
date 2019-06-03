@@ -1,10 +1,10 @@
 <template>
     <div class="container mt-5">
-        <Signin v-show="false" />
-        <Kids v-show="false" />
-        <Profile v-show="false" />
-        <Activities v-show="false" />
-        <ActivityDetails />
+        <!-- <Signin v-show="true" /> -->
+        <!-- <Kids v-show="true" /> -->
+        <!-- <Profile v-show="true" /> -->
+        <Activities v-show="true" />
+        <!-- <ActivityDetails /> -->
     </div>
 </template>
 
@@ -25,7 +25,7 @@ body {
     background-color: #5E9CAB;
 }
 .list-item:hover{
-    background: #5E9CAB;
+    background: #F689B2;
     color:#fff;
     cursor: pointer;
 }

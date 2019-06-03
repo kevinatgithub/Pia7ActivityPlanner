@@ -1817,6 +1817,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1836,48 +1838,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var activities = [{
-  id: 0,
-  title: "Acting Academy",
-  partner: "Star Magic",
-  img: "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/54/larger/Activities-ActingAcad.jpeg?1508897010",
-  textColor: "white"
-}, {
-  id: 1,
-  title: "Art and Design Academy",
-  partner: "National Bookstore",
-  img: "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/595/larger/Activities-ArtsNDesign.jpeg?1508900326",
-  textColor: "white"
-}, {
-  id: 2,
-  title: "Aviation Academy",
-  partner: "Cebu Pacific",
-  img: "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/55/larger/Activities-Aviation2.jpeg?1508897053",
-  textColor: "white"
-}, {
-  id: 3,
-  title: "BakeShop",
-  partner: "Goldilucks",
-  img: "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/58/larger/Activities-Bakeshop.jpeg?1508898097",
-  textColor: "white"
-}, {
-  id: 4,
-  title: "Bank",
-  partner: "Bank of the Philippine Islands",
-  img: "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/59/larger/Activities-Bank.jpeg?1508897601",
-  textColor: "black"
-}, {
-  id: 5,
-  title: "Beauty Salon",
-  partner: "Beauty Salon",
-  img: "https://d1eilicilqktnj.cloudfront.net/establishments/establishment_thumbnails/371/larger/Activities-BeautySalon.jpeg?1508853969",
-  textColor: "white"
-}];
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      activities: activities
+      establishments: [],
+      current: null
     };
+  },
+  mounted: function mounted() {
+    this.loadEstablishments();
+  },
+  methods: {
+    loadEstablishments: function loadEstablishments() {
+      var _this = this;
+
+      this.$http.get("/establishments").then(function (r) {
+        _this.establishments = r.data;
+      });
+    }
   }
 });
 
@@ -1925,8 +1936,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -33848,7 +33857,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.activity-card[data-v-3d789725]{\r\n    max-height: 100px !important;\r\n    overflow: hidden;\r\n    border:none !important;\r\n    cursor: pointer;\n}\n.activity-card[data-v-3d789725]:hover{\r\n    border:5px solid #fff;\n}\r\n", ""]);
+exports.push([module.i, "\n.activity-card[data-v-3d789725]{\r\n    max-height: 140px !important;\r\n    overflow: hidden;\r\n    border:none !important;\r\n    cursor: pointer;\n}\n.activity-card[data-v-3d789725]:hover{\r\n    border:5px solid #fff;\n}\r\n", ""]);
 
 // exports
 
@@ -33867,7 +33876,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\r\n    background-color: #5E9CAB;\n}\n.list-item:hover{\r\n    background: #5E9CAB;\r\n    color:#fff;\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\nbody {\r\n    background-color: #5E9CAB;\n}\n.list-item:hover{\r\n    background: #F689B2;\r\n    color:#fff;\r\n    cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -66176,41 +66185,163 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      { staticClass: "col-sm-12" },
-      [
-        _c("h2", { staticStyle: { color: "#fff", "text-align": "center" } }, [
-          _vm._v("Select Activity")
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.activities, function(a) {
-          return _c(
+    !_vm.current
+      ? _c("div", { staticClass: "col-sm-12" }, [
+          _c("p", { staticStyle: { color: "#fff" } }, [
+            _vm._v("Select an Establishment")
+          ]),
+          _vm._v(" "),
+          _c(
             "div",
-            { key: a.id, staticClass: "col-lg-4 col-md-6 mt-1 activity-card" },
-            [
-              _c("div", { class: "card bg-dark text-" + a.textColor }, [
-                _c("img", {
-                  staticClass: "card-img",
-                  attrs: { src: a.img, alt: "Card image" }
+            { staticClass: "row" },
+            _vm._l(_vm.establishments, function(a) {
+              return _c(
+                "div",
+                {
+                  key: a.id,
+                  staticClass:
+                    "col-xl-3 col-lg-4 col-md-6 mt-1 mb-1 activity-card",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.current = a
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      class:
+                        "card bg-dark text-" + (!a.color ? "white" : a.color)
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "card-img",
+                        attrs: { src: a.img, alt: "Card image" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-img-overlay" }, [
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(a.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(a.partner))
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.current
+      ? _c(
+          "div",
+          { staticClass: "col-sm-12" },
+          [
+            _c(
+              "b-jumbotron",
+              {
+                attrs: { header: _vm.current.name, lead: _vm.current.partner }
+              },
+              [
+                _c(
+                  "b-button",
+                  {
+                    attrs: { variant: "primary", size: "sm" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.current = null
+                      }
+                    }
+                  },
+                  [_vm._v("Back")]
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("b-img", {
+                  staticClass: "mt-2",
+                  attrs: { src: _vm.current.img, fluid: "", alt: "Img" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-img-overlay" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(a.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(a.partner))
-                  ])
+                _c("p", [_vm._v("Select Activity from this Establishment")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c(
+                    "table",
+                    {
+                      staticClass:
+                        "table table-bordered table-hover table-striped table-condensed",
+                      staticStyle: {
+                        "font-size": "12px",
+                        "background-color": "#fff"
+                      }
+                    },
+                    [
+                      _c("thead", [
+                        _c(
+                          "th",
+                          {
+                            staticClass: "text-center",
+                            attrs: { colspan: "5" }
+                          },
+                          [_vm._v("Available activity from this establishment")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("thead", [
+                        _c("th", [_vm._v("Role")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Kidzos")]),
+                        _vm._v(" "),
+                        _c("th", [
+                          _vm._v("Duration"),
+                          _c("br"),
+                          _vm._v("(In Minutes)")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Capacity")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Minimum Age")])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.current.activities, function(a) {
+                          return _c("tr", { key: a.id }, [
+                            _c("td", [
+                              _c("span", [_vm._v(_vm._s(a.job)), _c("br")]),
+                              _vm._v(_vm._s(a.role))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(a.kidzos))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(a.duration))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(a.capacity))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(a.min_age))])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
                 ])
-              ])
-            ]
-          )
-        })
-      ],
-      2
-    )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -66283,7 +66414,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "mt-5 col-sm-8 offset-sm-2" }, [
+    _c("div", { staticClass: "mt-5 col-sm-12" }, [
       _c(
         "div",
         [
@@ -66306,7 +66437,7 @@ var render = function() {
                       staticClass: "list-item",
                       on: { click: _vm.companionSelected }
                     },
-                    [_vm._v("Cras justo odio")]
+                    [_vm._v("James Reid")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -66315,7 +66446,7 @@ var render = function() {
                       staticClass: "list-item",
                       on: { click: _vm.companionSelected }
                     },
-                    [_vm._v("Dapibus ac facilisis in")]
+                    [_vm._v("Nadine Lustre")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -66324,25 +66455,7 @@ var render = function() {
                       staticClass: "list-item",
                       on: { click: _vm.companionSelected }
                     },
-                    [_vm._v("Morbi leo risus")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-list-group-item",
-                    {
-                      staticClass: "list-item",
-                      on: { click: _vm.companionSelected }
-                    },
-                    [_vm._v("Porta ac consectetur ac")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-list-group-item",
-                    {
-                      staticClass: "list-item",
-                      on: { click: _vm.companionSelected }
-                    },
-                    [_vm._v("Vestibulum at eros")]
+                    [_vm._v("Liza Soberano")]
                   )
                 ],
                 1
@@ -66397,7 +66510,7 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c(
       "div",
-      { staticClass: "mt-5 col-sm-8 offset-sm-2" },
+      { staticClass: "mt-5 col-sm-12" },
       [
         _c(
           "b-card",
@@ -66501,31 +66614,11 @@ var render = function() {
     "div",
     { staticClass: "container mt-5" },
     [
-      _c("Signin", {
-        directives: [
-          { name: "show", rawName: "v-show", value: false, expression: "false" }
-        ]
-      }),
-      _vm._v(" "),
-      _c("Kids", {
-        directives: [
-          { name: "show", rawName: "v-show", value: false, expression: "false" }
-        ]
-      }),
-      _vm._v(" "),
-      _c("Profile", {
-        directives: [
-          { name: "show", rawName: "v-show", value: false, expression: "false" }
-        ]
-      }),
-      _vm._v(" "),
       _c("Activities", {
         directives: [
-          { name: "show", rawName: "v-show", value: false, expression: "false" }
+          { name: "show", rawName: "v-show", value: true, expression: "true" }
         ]
-      }),
-      _vm._v(" "),
-      _c("ActivityDetails")
+      })
     ],
     1
   )
@@ -66555,7 +66648,7 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c(
       "div",
-      { staticClass: "mt-5 col-sm-8 offset-sm-2" },
+      { staticClass: "col-sm-12" },
       [
         _c(
           "b-card",
@@ -78828,6 +78921,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var bootstrap_vue_dist_bootstrap_vue_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-vue/dist/bootstrap-vue.css */ "./node_modules/bootstrap-vue/dist/bootstrap-vue.css");
 /* harmony import */ var bootstrap_vue_dist_bootstrap_vue_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_vue_dist_bootstrap_vue_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -78840,6 +78935,11 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+var base = axios__WEBPACK_IMPORTED_MODULE_3___default.a.create({
+  baseURL: 'http://localhost/kidzania/public/api'
+});
+Vue.prototype.$http = base;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
