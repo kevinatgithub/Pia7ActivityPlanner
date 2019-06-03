@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 mt-1 mb-1 activity-card"  v-for="a in establishments" :key="a.id" @click.prevent="current=a">
                     <div :class="'card bg-dark text-' + (!a.color ? 'white' : a.color)">
-                        <img class="card-img" :src="a.img" alt="Card image">
+                        <img class="card-img" :src="'img/' +a.img" alt="Card image">
                         <div class="card-img-overlay">
                             <h5 class="card-title">{{a.name}}</h5>
                             <p class="card-text">{{a.partner}}</p>
@@ -19,11 +19,11 @@
         <div class="col-sm-12" v-if="current">
             <b-jumbotron :header="current.name" :lead="current.partner">
                 <b-button variant="primary" size="sm" @click.prevent="current=null">Back</b-button><br/>
-                <b-img class="mt-2" :src="current.img" fluid alt="Img"></b-img>
+                <b-img class="mt-2" :src="'img/'+current.img" fluid alt="Img"></b-img>
                 <p>Select Activity from this Establishment</p>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped table-condensed" style="font-size:12px; background-color:#fff;">
-                        <thead>
+                        <thead class="thead-dark">
                             <th colspan="5" class="text-center">Available activity from this establishment</th>
                         </thead>
                         <thead>

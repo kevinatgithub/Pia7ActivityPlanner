@@ -3,8 +3,9 @@
         <!-- <Signin v-show="true" /> -->
         <!-- <Kids v-show="true" /> -->
         <!-- <Profile v-show="true" /> -->
-        <Activities v-show="true" />
+        <!-- <Activities v-show="true" /> -->
         <!-- <ActivityDetails /> -->
+        <TimeSlotPicker />
     </div>
 </template>
 
@@ -14,9 +15,10 @@ import Kids from './Kids/List'
 import Profile from './Kids/Profile'
 import Activities from './Activity/MasterList'
 import ActivityDetails from './Activity/Details'
+import TimeSlotPicker from './Activity/TimeSlotPicker'
 
 export default {
-    components : { Signin, Kids, Profile, Activities, ActivityDetails }
+    components : { Signin, Kids, Profile, Activities, ActivityDetails, TimeSlotPicker }
 }
 </script>
 
