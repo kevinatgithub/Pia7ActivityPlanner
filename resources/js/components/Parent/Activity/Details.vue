@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
     data(){
         return {
@@ -39,6 +41,7 @@ export default {
                 textColor : "white"
             }
         }
-    }
+    },
+    computed : mapState(['activity'])
 }
 </script>

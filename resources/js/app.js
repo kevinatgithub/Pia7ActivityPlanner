@@ -15,7 +15,7 @@ Vue.use(BootstrapVue)
 import axios from 'axios'
 
 const base = axios.create({
-  baseURL: 'http://localhost/kidzania/public/api'
+  baseURL: '/kidzania/public/api'
 })
 
 Vue.prototype.$http = base
@@ -32,13 +32,15 @@ Vue.prototype.$http = base
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('App', require('./components/Main.vue').default);
+Vue.component('App', require('./components/AppRouteControl.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import store from './store';
 
 const app = new Vue({
-    el: '#app',
+  el: '#app',
+  store,
 });

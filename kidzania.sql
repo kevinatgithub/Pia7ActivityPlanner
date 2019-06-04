@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2019 at 04:34 PM
--- Server version: 10.1.40-MariaDB
--- PHP Version: 7.3.5
+-- Generation Time: Jun 04, 2019 at 11:38 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -158,6 +158,36 @@ INSERT INTO `activity` (`id`, `establishment`, `job`, `role`, `kidzos`, `duratio
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `appointment`
+--
+
+CREATE TABLE `appointment` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `activity` int(11) NOT NULL,
+  `guest` int(11) NOT NULL,
+  `start` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `end` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`id`, `activity`, `guest`, `start`, `end`, `created_at`, `updated_at`) VALUES
+(1, 40, 18, '09:00 AM', '09:30 AM', '2019-06-03 22:37:43', '2019-06-03 22:37:43'),
+(2, 27, 26, '09:00 AM', '09:15 AM', '2019-06-03 23:08:55', '2019-06-03 23:08:55'),
+(3, 27, 36, '09:00 AM', '09:15 AM', '2019-06-03 23:59:17', '2019-06-03 23:59:17'),
+(4, 65, 2, '09:00 AM', '09:20 AM', '2019-06-04 00:13:48', '2019-06-04 00:13:48'),
+(5, 23, 2, '09:30 AM', '10:00 AM', '2019-06-04 00:14:24', '2019-06-04 00:14:24'),
+(6, 22, 2, '09:00 AM', '09:15 AM', '2019-06-04 00:15:17', '2019-06-04 00:15:17'),
+(7, 16, 2, '09:00 AM', '09:15 AM', '2019-06-04 00:18:39', '2019-06-04 00:18:39'),
+(8, 5, 2, '09:00 AM', '09:20 AM', '2019-06-04 00:21:53', '2019-06-04 00:21:53');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `establishment`
 --
 
@@ -245,6 +275,64 @@ INSERT INTO `establishment` (`id`, `name`, `partner`, `img`, `color`, `created_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `guest`
+--
+
+CREATE TABLE `guest` (
+  `guest_id` int(11) NOT NULL,
+  `code` varchar(6) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `rsvp_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `guest`
+--
+
+INSERT INTO `guest` (`guest_id`, `code`, `name`, `rsvp_date`) VALUES
+(2, '318EYZ', 'Mavreen Picaso', '2019-05-24 16:37:16'),
+(4, 'CQMVK1', 'Lauren Magallones', '2019-05-25 15:04:46'),
+(5, 'CQMVK1', 'Milady Magallones', '2019-05-25 15:04:46'),
+(6, 'CQMVK1', 'Hubert Magallones', '2019-05-25 15:04:46'),
+(7, 'DAYFHG', 'Darwin Deato', '2019-05-26 09:50:38'),
+(8, 'UPSEGZ', 'Josephine & Penelope Dela Paz', '2019-05-27 01:38:26'),
+(9, 'K2YV3S', 'Sean Sebastian', '2019-05-27 09:47:07'),
+(10, '4B2SZ1', 'Rob Amparo', '2019-05-28 20:23:14'),
+(11, '4B2SZ1', 'Anton Amparo', '2019-05-28 20:23:14'),
+(12, '4B2SZ1', 'Luis Amparo', '2019-05-28 20:23:14'),
+(13, 'U98EW1', 'Bheng Temporal', '2019-05-29 13:29:08'),
+(14, 'LU8QM4', 'Hernand De Vera', '2019-05-29 20:39:06'),
+(15, 'XTR815', 'Alex Tan', '2019-05-30 07:04:27'),
+(16, '2K4JFA', 'Ledda P. Zapanta', '2019-05-30 13:59:46'),
+(17, '7JTR1V', 'Jofel Esleta', '2019-05-31 20:27:11'),
+(18, 'UACGJL', 'Antonio de los Angeles Jr.', '2019-06-01 10:09:20'),
+(19, 'UACGJL', 'Lauren delos Angeles', '2019-06-01 10:09:20'),
+(20, 'UACGJL', 'Luis de los Angeles', '2019-06-01 10:09:20'),
+(21, 'EGYU34', 'Honey Ebora, Dinno Ebora', '2019-06-01 18:20:02'),
+(22, 'EGT4HX', 'Gerard Mercadal', '2019-06-02 06:02:45'),
+(23, 'EGT4HX', 'Marga Mercadal', '2019-06-02 06:02:45'),
+(24, 'EGT4HX', 'Chesca Mercadal', '2019-06-02 06:02:45'),
+(25, '34HSPD', 'Ria Rafael', '2019-06-02 14:36:29'),
+(26, 'GB7NRZ', 'Archie Clataro', '2019-06-02 15:53:20'),
+(27, 'M3VKJP', 'Sarah Gonzales', '2019-06-02 19:15:02'),
+(28, 'L7VS2F', 'Tito Ken', '2019-06-03 00:08:38'),
+(29, 'L7VS2F', 'Joedi', '2019-06-03 00:08:38'),
+(30, 'L7VS2F', 'Jillian', '2019-06-03 00:08:38'),
+(31, 'L7VS2F', 'Joseph', '2019-06-03 00:08:38'),
+(32, 'L7VS2F', 'Yaya Abby', '2019-06-03 00:08:38'),
+(33, 'LAFZH2', 'VICTOR C. TUAZON', '2019-06-03 09:46:53'),
+(34, 'LAFZH2', 'KARLO M. TUAZON', '2019-06-03 09:46:53'),
+(35, 'B5JMUR', 'Tito Art', '2019-06-03 14:18:20'),
+(36, 'B5JMUR', 'Alfonso Joaquin', '2019-06-03 14:18:20'),
+(37, 'B5JMUR', 'Aeisha Julia', '2019-06-03 14:18:20'),
+(38, 'B5JMUR', 'Andres Julio', '2019-06-03 14:18:20'),
+(39, '6KHDEQ', 'Hermie Maglaya Ang', '2019-06-03 14:21:37'),
+(40, '6KHDEQ', 'Salvacion Fontanilla', '2019-06-03 14:21:37'),
+(41, '6KHDEQ', 'Fiona Maglaya', '2019-06-03 14:21:37');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -262,7 +350,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_06_03_080219_create_table_establishment', 1),
-(5, '2019_06_03_092538_create_activity', 2);
+(5, '2019_06_03_092538_create_activity', 2),
+(6, '2019_06_04_045136_create_appointment', 3);
 
 -- --------------------------------------------------------
 
@@ -304,10 +393,22 @@ ALTER TABLE `activity`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `establishment`
 --
 ALTER TABLE `establishment`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `guest`
+--
+ALTER TABLE `guest`
+  ADD PRIMARY KEY (`guest_id`);
 
 --
 -- Indexes for table `migrations`
@@ -339,16 +440,28 @@ ALTER TABLE `activity`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `establishment`
 --
 ALTER TABLE `establishment`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
+-- AUTO_INCREMENT for table `guest`
+--
+ALTER TABLE `guest`
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

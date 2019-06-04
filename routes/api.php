@@ -14,7 +14,11 @@ use Illuminate\Http\Request;
 */
 
 Route::get('establishments','EstablishmentController@lists');
+Route::get('reportactivity/{id}','EstablishmentController@reportactivity');
 Route::get('activity/{id}','EstablishmentController@activity');
+Route::get('guests/{code}','EstablishmentController@guests');
+Route::get('appointments/{id}','EstablishmentController@guestAppointments');
+Route::post('addAppointment','EstablishmentController@addAppointment');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

@@ -4,14 +4,14 @@
             <b-card no-body class="overflow-hidden" >
                 <b-row no-gutters>
                     <b-col md="6">
-                        <b-card-img src="http://pia7th.bobongmd.com/vendor/pia/img/logo.jpg" class="rounded-0"></b-card-img>
+                        <b-card-img src="img/logo.jpg" class="rounded-0"></b-card-img>
                     </b-col>
                     <b-col md="6">
                         <b-card-body title="Invitation Code">
                         <b-card-text>
                             Plan your kids activities on KidZania ahead,<br/>
                             Please enter your invitation code below.
-                            <b-form @submit="onSubmit" class="mt-2">
+                            <b-form @submit.prevent="onSubmit" class="mt-2">
                                 <b-form-group
                                     id="input-group-1"
                                     label-for="input-1"
@@ -22,6 +22,8 @@
                                     required
                                     placeholder="Invitation Code Here!"
                                     :state="validation"
+                                    v-model="localCode"
+                                    autocomplete="off"
                                     ></b-form-input>
                                      <b-form-invalid-feedback :state="validation">
                                         The Invitation code you provided is invalid.
@@ -42,12 +44,35 @@
 export default {
     data(){
         return  {
+            localCode : null,
             validation: null
         }
     },
     methods : {
         onSubmit(){
-
+            this.$http.get("/guests/"+this.localCode)
+            .then(r=>{
+                if(r.data.length == 0){
+                    this.validation = false;
+                }else{
+                    this.validation = true;
+                    this.$store.commit("setGuestGroup",r.data);
+                    // console.log(this.$store)
+                }
+            })
+        }
+    },
+    computed : {
+        guestGroup(){
+            return this.$store.state.guestGroup
+        }
+    },
+    watch : {
+        guestGroup(){
+            if(this.guestGroup == null){
+                this.localCode = null
+                this.validation = null
+            }
         }
     }
 }
